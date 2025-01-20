@@ -1,8 +1,8 @@
 CREATE TABLE persons
 (
-	person_id			SERIAL NOT NULL,
-	cpf					VARCHAR(11),
-	name				TEXT,
+    person_id            SERIAL NOT NULL,
+    cpf                    VARCHAR(11),
+    name                TEXT,
     phone1_name         TEXT,
     phone1_number       TEXT,
     phone2_name         TEXT,
@@ -11,10 +11,10 @@ CREATE TABLE persons
     notes               TEXT,
     address_set_id      UUID,
     status              CHAR(1) NOT NULL DEFAULT 'C',
-	created_at			TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    created_at            TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_at          TIMESTAMPTZ,
-	CONSTRAINT pk_person_id PRIMARY KEY (person_id),
-	CONSTRAINT uk_person_cpf UNIQUE (cpf),
+    CONSTRAINT pk_person_id PRIMARY KEY (person_id),
+    CONSTRAINT uk_person_cpf UNIQUE (cpf),
     CONSTRAINT fk_persons_addrsetid FOREIGN KEY (address_set_id) 
         REFERENCES address_sets (address_set_id)
         ON DELETE RESTRICT ON UPDATE CASCADE

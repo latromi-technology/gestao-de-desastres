@@ -1,24 +1,24 @@
 CREATE TABLE hubs
-(	
-	hub_id				SERIAL NOT NULL,
-	name				TEXT,
-	main_contact_name	TEXT,
-	main_contact_phone	TEXT,
-	main_contact_email	TEXT,
-	alt_contact_name	TEXT,
-	alt_contact_phone	TEXT,
-	alt_contact_email	TEXT,
-	cep					VARCHAR(8),
-	city_id				INT,
-	district			TEXT,
-	address				TEXT,
-	coordinates			point,
-	enabled             BOOLEAN NOT NULL DEFAULT TRUE,
-    hub                 BOOLEAN NOT NULL DEFAULT FALSE,
-    dc                  BOOLEAN NOT NULL DEFAULT TRUE,
-	created_at 			TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
-	CONSTRAINT pk_hubs_id PRIMARY KEY (hub_id),
-	CONSTRAINT pk_hubs_cityid FOREIGN KEY (city_id) REFERENCES cities (city_id) ON DELETE RESTRICT ON UPDATE CASCADE
+(    
+    hub_id                	SERIAL NOT NULL,
+    name                	TEXT,
+    main_contact_name    	TEXT,
+    main_contact_phone    	TEXT,
+    main_contact_email    	TEXT,
+    alt_contact_name    	TEXT,
+    alt_contact_phone    	TEXT,
+    alt_contact_email    	TEXT,
+    cep                    	VARCHAR(8),
+    city_id                	INT,
+    district            	TEXT,
+    address                	TEXT,
+    coordinates            	point,
+    enabled             	BOOLEAN NOT NULL DEFAULT TRUE,
+    hub                 	BOOLEAN NOT NULL DEFAULT FALSE,
+    dc                  	BOOLEAN NOT NULL DEFAULT TRUE,
+    created_at             	TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    CONSTRAINT pk_hubs_id PRIMARY KEY (hub_id),
+    CONSTRAINT pk_hubs_cityid FOREIGN KEY (city_id) REFERENCES cities (city_id) ON DELETE RESTRICT ON UPDATE CASCADE
 );
 COMMENT ON TABLE hubs IS 'Cadastro dos bases logísticas, local onde os donativos são recebidos e processados antes de serem entregues no destino final (municipio)';
 COMMENT ON COLUMN hubs.hub_id IS 'Identificador da base logística';
