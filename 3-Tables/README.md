@@ -1,5 +1,3 @@
-# Docuemntação das Tabelas
-
 <details>
 <summary>countries — Cadastro de Países</summary>
 
@@ -22,9 +20,6 @@ Cadastro de Países
 | `PRIMARY KEY` | pk_country_id | country_id |  |
 | `UNIQUE` | uk_country_alpha2 | alpha2 |  |
 </details>
-
----
-
 <details>
 <summary>states — Cadastro de Estados</summary>
 
@@ -49,9 +44,6 @@ Cadastro de Estados
 | `UNIQUE` | uk_state_countryid_alpha2 | country_id, alpha2 |  |
 | `FOREIGN KEY` | fk_state_countryid | country_id | countries (country_id) |
 </details>
-
----
-
 <details>
 <summary>cities — Cadastro de cidade</summary>
 
@@ -76,9 +68,6 @@ Cadastro de cidade
 | `PRIMARY KEY` | pk_cities_id | city_id |  |
 | `FOREIGN KEY` | fk_cities_id | state_id | states (state_id) |
 </details>
-
----
-
 <details>
 <summary>binaries — Tabela onde são armazenados os arquivos binários (blobs), como fotos por exemplo.</summary>
 
@@ -103,9 +92,6 @@ Tabela onde são armazenados os arquivos binários (blobs), como fotos por exemp
 | `PRIMARY KEY` | pk_binaries_id | binary_id |  |
 | `UNIQUE` | fk_binaries_hash | binary_hash |  |
 </details>
-
----
-
 <details>
 <summary>files — Armazena a referência aos arquivos. Quando a coluna "binary_hash" estiver preenchida, significa que o arquivo foi salvo no banco de dados. Neste caso, o conteúdo dele está gravado na tabela "storage.binaries".</summary>
 
@@ -132,9 +118,6 @@ Armazena a referência aos arquivos. Quando a coluna "binary_hash" estiver preen
 | `PRIMARY KEY` | pk_files_fileid | file_id |  |
 | `FOREIGN KEY` | fk_files_binaryid | binary_id | binaries (binary_id) |
 </details>
-
----
-
 <details>
 <summary>address_sets — Conjunto de endereços. Por exemplo, uma pessoa pode ter mais de um endereço cadastrado (Casa, Escritório). Os endereços são agrupados no conjunto de endereços e o ID do conjunto é assoaciado ao cadastro da pessoa</summary>
 
@@ -157,9 +140,6 @@ Conjunto de endereços. Por exemplo, uma pessoa pode ter mais de um endereço ca
 |------|------|-----------|----------------------|
 | `PRIMARY KEY` | pk_addresssets_id | address_set_id |  |
 </details>
-
----
-
 <details>
 <summary>addresses — Endereços cadastrados. Os endereços podem ser cadastrados a vulso ou associados a um conjunto de endereços.</summary>
 
@@ -193,9 +173,6 @@ Endereços cadastrados. Os endereços podem ser cadastrados a vulso ou associado
 | `FOREIGN KEY` | fk_address_cityid | city_id | cities (city_id) |
 | `FOREIGN KEY` | fk_address_stateid | state_id | states (state_id) |
 </details>
-
----
-
 <details>
 <summary>organizations — Cadastro de organizações/empresas</summary>
 
@@ -240,9 +217,6 @@ Cadastro de organizações/empresas
 | `FOREIGN KEY` | fk_organizations_addrsetid | address_set_id | address_sets (address_set_id) |
 | `FOREIGN KEY` | fk_organizations_cityid | city_id | cities (city_id) |
 </details>
-
----
-
 <details>
 <summary>persons — Cadastro de Pessoas</summary>
 
@@ -276,9 +250,6 @@ Cadastro de Pessoas
 | `UNIQUE` | uk_person_cpf | cpf |  |
 | `FOREIGN KEY` | fk_persons_addrsetid | address_set_id | address_sets (address_set_id) |
 </details>
-
----
-
 <details>
 <summary>users — Cadastros dos usuários</summary>
 
@@ -305,9 +276,6 @@ Cadastros dos usuários
 | `UNIQUE` | uk_users_username | username |  |
 | `FOREIGN KEY` | fk_users_person_id | person_id | persons (person_id) |
 </details>
-
----
-
 <details>
 <summary>entities — Cadastro de entidades. Uma entidade é uma organização lógica, não necessáriamente vinculada à um CNPJ. Exemplo: Regionais da Defesa Civil, ONG, abrigos, orgão governamentais.</summary>
 
@@ -342,9 +310,6 @@ Cadastro de entidades. Uma entidade é uma organização lógica, não necessár
 | `FOREIGN KEY` | fk_entities_organizationid | organization_id | organizations (organization_id) |
 | `FOREIGN KEY` | fk_entities_parententityid | parent_entity_id | entities (entity_id) |
 </details>
-
----
-
 <details>
 <summary>entities_users — Usuários que fazem parte de uma entidade</summary>
 
@@ -369,9 +334,6 @@ Usuários que fazem parte de uma entidade
 | `FOREIGN KEY` | fk_entitiesusers_entityid | entity_id | entities (entity_id) |
 | `FOREIGN KEY` | fk_entitiesusers_userid | user_id | users (user_id) |
 </details>
-
----
-
 <details>
 <summary>entities_addresses — [Obsoleto: Essa tabela foi descontinuada, e no lugar dela, passamos a utilizar "address_sets"] Conjunto de endereços da entidade.</summary>
 
@@ -394,9 +356,6 @@ Usuários que fazem parte de uma entidade
 | `FOREIGN KEY` | fk_entitiesaddress_addressid | address_id | addresses (address_id) |
 | `FOREIGN KEY` | fk_entitiesaddress_enityid | entity_id | entities (entity_id) |
 </details>
-
----
-
 <details>
 <summary>hubs — Cadastro dos bases logísticas, local onde os donativos são recebidos e processados antes de serem entregues no destino final (municipio)</summary>
 
@@ -433,9 +392,6 @@ Cadastro dos bases logísticas, local onde os donativos são recebidos e process
 | `PRIMARY KEY` | pk_hubs_id | hub_id |  |
 | `FOREIGN KEY` | pk_hubs_cityid | city_id | cities (city_id) |
 </details>
-
----
-
 <details>
 <summary>hubs_cities — Cidades atendidas pela base logística.</summary>
 
@@ -462,9 +418,6 @@ Cidades atendidas pela base logística.
 | `FOREIGN KEY` | fk_hubscities_cityid | city_id | cities (city_id) |
 | `FOREIGN KEY` | fk_hubscities_hubid | hub_id | hubs (hub_id) |
 </details>
-
----
-
 <details>
 <summary>hubs_products — Essa tabela contém o produtos que podem ser armazenados ou processados na base logística</summary>
 
@@ -489,9 +442,6 @@ Essa tabela contém o produtos que podem ser armazenados ou processados na base 
 | `FOREIGN KEY` | fk_hubsproducts_hubid | hub_id | hubs (hub_id) |
 | `FOREIGN KEY` | fk_hubsproducts_productid | product_id | products (product_id) |
 </details>
-
----
-
 <details>
 <summary>regions — Cadastro das coordenadorias regionais de proteção e defesa civil (regionais).</summary>
 
@@ -525,9 +475,6 @@ Cadastro das coordenadorias regionais de proteção e defesa civil (regionais).
 | `PRIMARY KEY` | pk_regions_id | region_id |  |
 | `FOREIGN KEY` | pk_regions_cityid | city_id | cities (city_id) |
 </details>
-
----
-
 <details>
 <summary>regions_cities — Relação de munícipios atendidos por cada coordenadorias regionais de proteção e defesa civil (regionais)</summary>
 
@@ -554,9 +501,6 @@ Relação de munícipios atendidos por cada coordenadorias regionais de proteç�
 | `FOREIGN KEY` | fk_hubscities_cityid | city_id | cities (city_id) |
 | `FOREIGN KEY` | fk_hubscities_regionid | region_id | regions (region_id) |
 </details>
-
----
-
 <details>
 <summary>carriers — Cadastro de transportadoras</summary>
 
@@ -581,9 +525,6 @@ Cadastro de transportadoras
 |------|------|-----------|----------------------|
 | `PRIMARY KEY` | pk_carriers_carrierid | carrier_id |  |
 </details>
-
----
-
 <details>
 <summary>truck_types — Tipos de veículos (inicialmente eram apenas caminhões)</summary>
 
@@ -607,9 +548,6 @@ Tipos de veículos (inicialmente eram apenas caminhões)
 |------|------|-----------|----------------------|
 | `PRIMARY KEY` | pk_trucktype_id | truck_type_id |  |
 </details>
-
----
-
 <details>
 <summary>units — Cadastro de unidades de medidas</summary>
 
@@ -632,9 +570,6 @@ Cadastro de unidades de medidas
 | `PRIMARY KEY` | pk_units_id | unit_id |  |
 | `UNIQUE` | uk_units_symbol | symbol |  |
 </details>
-
----
-
 <details>
 <summary>unit_conversion_sets — Conjuntos de conversão de unidades</summary>
 
@@ -657,9 +592,6 @@ Conjuntos de conversão de unidades
 |------|------|-----------|----------------------|
 | `PRIMARY KEY` | pk_unitconversionsets_id | unit_conversion_set_id |  |
 </details>
-
----
-
 <details>
 <summary>unit_conversions — Conversões de unidades do conjunto</summary>
 
@@ -689,9 +621,6 @@ Conversões de unidades do conjunto
 | `FOREIGN KEY` | fk_unitconversions_unitin | in_unit_id | units (unit_id) |
 | `FOREIGN KEY` | fk_unitconversions_unitout | out_unit_id | units (unit_id) |
 </details>
-
----
-
 <details>
 <summary>faq_categories — Categorias de FAQ (perguntas frequentes)</summary>
 
@@ -713,9 +642,6 @@ Categorias de FAQ (perguntas frequentes)
 |------|------|-----------|----------------------|
 | `PRIMARY KEY` | pk_faq_categories_id | faq_category_id |  |
 </details>
-
----
-
 <details>
 <summary>faq — FAQ (perguntas frequentes). Este recurso é usado pelos operadores do Callcenter para tirar dúvidas durante as ligações</summary>
 
@@ -745,9 +671,6 @@ FAQ (perguntas frequentes). Este recurso é usado pelos operadores do Callcenter
 |------|------|-----------|----------------------|
 | `PRIMARY KEY` | pk_faq_id | faq_id |  |
 </details>
-
----
-
 <details>
 <summary>categories — Categorias de produtos</summary>
 
@@ -768,9 +691,6 @@ Categorias de produtos
 |------|------|-----------|----------------------|
 | `PRIMARY KEY` | pk_categories_id | category_id |  |
 </details>
-
----
-
 <details>
 <summary>products — Cadastro de produtos (donativos)</summary>
 
@@ -809,9 +729,6 @@ Cadastro de produtos (donativos)
 | `FOREIGN KEY` | fk_products_requestunitid | request_unit_id | units (unit_id) |
 | `FOREIGN KEY` | fk_products_unitconvsetid | unit_conversion_set_id | unit_conversion_sets (unit_conversion_set_id) |
 </details>
-
----
-
 <details>
 <summary>events — Eventos</summary>
 
@@ -836,9 +753,6 @@ Eventos
 | `PRIMARY KEY` | pk_events_id | event_id |  |
 | `UNIQUE` | uk_events_code | code |  |
 </details>
-
----
-
 <details>
 <summary>offers — Registro de ofertas (doações)</summary>
 
@@ -910,9 +824,6 @@ Registro de ofertas (doações)
 | `FOREIGN KEY` | fk_offers_targethubid | target_hub_id | hubs (hub_id) |
 | `FOREIGN KEY` | fk_offers_trucktypeid | shipping_truck_type_id | truck_types (truck_type_id) |
 </details>
-
----
-
 <details>
 <summary>offers_products — Produtos registrados na oferta (doação)</summary>
 
@@ -943,9 +854,6 @@ Produtos registrados na oferta (doação)
 | `FOREIGN KEY` | fk_offersproducts_productid | product_id | products (product_id) |
 | `FOREIGN KEY` | fk_offersproducts_unitid | unit_id | units (unit_id) |
 </details>
-
----
-
 <details>
 <summary>offers_history — Informações inseridas pelo operador e registradas em formato de histórico na oferta (doação).</summary>
 
@@ -971,9 +879,6 @@ Informações inseridas pelo operador e registradas em formato de histórico na 
 | `PRIMARY KEY` | pk_offerhistory_id | offer_history_id |  |
 | `FOREIGN KEY` | fk_offerhistory_offerid | offer_id | offers (offer_id) |
 </details>
-
----
-
 <details>
 <summary>requests — Registro de solicitações de materiais (demandas)</summary>
 
@@ -1023,9 +928,6 @@ Registro de solicitações de materiais (demandas)
 | `FOREIGN KEY` | fk_requests_deliveryaddrid | delivery_address_id | addresses (address_id) |
 | `FOREIGN KEY` | fk_requests_entityid | entity_id | entities (entity_id) |
 </details>
-
----
-
 <details>
 <summary>requests_products — Produtos que compões a demanda</summary>
 
@@ -1063,9 +965,6 @@ Produtos que compões a demanda
 | `FOREIGN KEY` | fk_requestproducts_requestid | request_id | requests (request_id) |
 | `FOREIGN KEY` | pk_requestproducts_unitid | unit_id | units (unit_id) |
 </details>
-
----
-
 <details>
 <summary>requests_approvals — Registro de aprovações da demanda (histórico)</summary>
 
@@ -1095,9 +994,6 @@ Registro de aprovações da demanda (histórico)
 | `FOREIGN KEY` | fk_requestappr_requestid | request_id | requests (request_id) |
 | `FOREIGN KEY` | fk_requestappr_requestproductid | request_product_id | requests_products (request_product_id) |
 </details>
-
----
-
 <details>
 <summary>vehicle_entries_exits — Registro de entradas e saídas de veículos (controle de portaria)</summary>
 
